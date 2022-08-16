@@ -1,6 +1,6 @@
 class Train
 	attr_accessor :speed
-	attr_reader :car_qty, :location, :type
+	attr_reader :cars_qty, :location, :type
 
 	def initialize(number, type, cars_qty)
 		@number = number
@@ -16,7 +16,7 @@ class Train
 	end
 
 	def unhook_cars(qty = 1)
-		@cars_qty -= qty if @speed == 0
+		@cars_qty -= qty if @speed == 0 if qty < @cars_qty
 	end
 
 	def set_route(route)
