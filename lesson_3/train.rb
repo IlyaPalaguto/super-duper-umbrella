@@ -20,24 +20,25 @@ class Train
 	end
 
 	def set_route(route)
-		@location.send_train(self) if !@location.nil?								#Если маршрут устанавливается впервые - пропустит этот шаг
+		@location.send_train(self) if !@location.nil?																	#Если маршрут устанавливается впервые - пропустит этот шаг
 		@location = route.from														
 		@location.get_train(self)
-		@active_route = [route.from]												#Формирование маршрута для поезда
+
+		@active_route = [route.from]																									#Формирование маршрута для поезда
 		route.intermediate_stations.each {|station| @active_route << station}
 		@active_route << route.to
 	end
 
 	def go_next_station
-		if !@location.nil? && @location != @active_route.last						#Поезд не поедет дальше если он стоит на последней станции,
-			@location.send_train(self)												#или если у него нет маршрута.
+		if !@location.nil? && @location != @active_route.last													#Поезд не поедет дальше если он стоит на последней станции,
+			@location.send_train(self)																									#или если у него нет маршрута.
 			@location = @active_route[(@active_route.find_index(@location) + 1)] 
 			@location.get_train(self)
 		end
 	end
 
 	def go_back_station
-		if !@location.nil? && @location != @active_route.first						#Так же он не поедет назад
+		if !@location.nil? && @location != @active_route.first												#Так же он не поедет назад
 			@location.send_train(self)
 			@location = @active_route[(@active_route.find_index(@location) - 1)] 
 			@location.get_train(self)
@@ -46,10 +47,10 @@ class Train
 
 	def next_station
 		@active_route[(@active_route.find_index(@location) + 1)] if !@location.nil? && @location != active_route.last			#Ничего не покажет если
-	end 																														#если не установлен
-																																#маршрут, или поезд
-	def previous_station																										#стоит на последней
-		@active_route[(@active_route.find_index(@location) - 1)] if !@location.nil? && @location != @active_route.first			#станции.
+	end 																																																								#если не установлен
+																																																											#маршрут, или поезд
+	def previous_station																																																#стоит на последней
+		@active_route[(@active_route.find_index(@location) - 1)] if !@location.nil? && @location != @active_route.first		#станции.
 	end
 end
 
@@ -98,10 +99,10 @@ class Station
 		@trains_on_station.delete(train)
 	end
 
-	def trains_on_station(type = 'all')									#В зависимости от входного параметра, указывает поезда находящихся на станции.
-		trains_on_station = []											#Если type = "pass" - вернет только пассажирские поезда,
-		case type														#Если type = "cargo" - вернет только грузовые поезда.
-		when 'pass'														#Если параметр не задан - вернет все позда находящиеся на станции.
+	def trains_on_station(type = 'all')										#В зависимости от входного параметра, указывает поезда находящихся на станции.
+		trains_on_station = []															#Если type = "pass" - вернет только пассажирские поезда,
+		case type																						#Если type = "cargo" - вернет только грузовые поезда.
+		when 'pass'																					#Если параметр не задан - вернет все позда находящиеся на станции.
 			@trains_on_station.each do |train|
 				trains_on_station << train if train.type == 'pass'
 			end
