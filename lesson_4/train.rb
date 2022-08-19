@@ -1,7 +1,6 @@
 class Train
 	attr_accessor :speed
 	attr_reader :location, :type, :number, :active_route, :cars
-	@@trains_array = []
 
 	def initialize(number)
 		@number = number
@@ -10,11 +9,6 @@ class Train
 		@location = nil
 		@active_route = nil
 		@type = nil
-		@@trains_array << self
-	end
-
-	def self.trains_array
-		@@trains_array
 	end
 
 	def set_route(route)

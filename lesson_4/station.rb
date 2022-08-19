@@ -1,17 +1,10 @@
 class Station
 	attr_reader :title
-	@@stations_array = []
 
 	def initialize(title)
 		@title = title
 		@trains_on_station = []
-		@@stations_array << self
 	end
-
-	def self.stations_array
-		@@stations_array
-	end
-
 
 	def send_train(train)
 		send_train!(train) if train_on_station?(train)

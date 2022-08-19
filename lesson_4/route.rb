@@ -1,16 +1,10 @@
 class Route
 	attr_reader :intermediate_stations, :from, :to, :title
-	@@routes_array = []
 
 	def initialize(from, to)
 		@from = from
 		@to = to
 		@intermediate_stations = []
-		@@routes_array << self
-	end
-
-	def self.routes_array
-		@@routes_array
 	end
 
 	def add_station(station)

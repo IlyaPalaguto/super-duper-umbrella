@@ -1,15 +1,8 @@
 class Carriage
 	attr_reader :to_train, :count
-	@@carriage_array = [nil]
 
 	def initialize
-		@count = @@carriage_array.length
 		@to_train = nil
-		@@carriage_array << self
-	end
-
-	def self.carriage_array
-		@@carriage_array
 	end
 
 	def lock_car(train)
