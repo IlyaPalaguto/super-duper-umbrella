@@ -83,7 +83,7 @@ class Main
     end
   end
 
-  def current_station(added_text = "")
+	def current_station(added_text = "")
 		puts "Выберте станцию " + added_text
 		stations_list
 		@stations[gets.chomp.to_i - 1]
@@ -113,7 +113,7 @@ class Main
 		@trains.each_with_index {|train, i| puts "#{i + 1} - #{train.number}"}
 	end
 
-  def create_train
+	def create_train
 		puts "Введите номер поезда"
 		number = gets.chomp
 		puts "Поезд какого типа создать? \n1 - Пассажирский \n2 - Грузовой"
@@ -123,16 +123,16 @@ class Main
 			@trains << CargoTrain.new(number)
 		end
 		puts "Поезд с номером #{@trains.last.number} был успешно создан"
-  end
+	end
 
-  def create_station
-    puts "Введите название станции"
-    @stations << (Station.new(gets.chomp.capitalize))
-    puts "Станция #{@stations.last.title} была успешно создана."
-  end
+	def create_station
+		puts "Введите название станции"
+		@stations << (Station.new(gets.chomp.capitalize))
+		puts "Станция #{@stations.last.title} была успешно создана."
+	end
 
-  def create_route
-  	from = current_station("точки отправления")
+	def create_route
+		from = current_station("точки отправления")
 		puts "Станция #{from.title} - теперь начальная станция маршрута"
 
 		to = nil
@@ -147,10 +147,10 @@ class Main
 		end
 		@routes << Route.new(from, to)
 		puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
-  end
+	end
 
-  def add_station_on_route
-  	route = current_route
+	def add_station_on_route
+		route = current_route
 		station = current_station
 		if route.whole_stations.include?(station)
 			puts "Эта станция уже есть в маршруте"
@@ -158,9 +158,9 @@ class Main
 			route.add_station(station)
 			puts "Станция #{station.title} успешно добавлена к маршруту #{route.route_title}!"
 		end
-  end
+	end
 
-  def delete_station_on_route
+	def delete_station_on_route
 		route = current_route
 		puts "Какую станцию удалить из маршрута?"
 		route.intermediate_stations.each_with_index {|station, i| puts "#{i + 1} - #{station.title}"}
