@@ -215,9 +215,4 @@ class Main
 		return "exit"
 	end
 end
-
-<<<<<<< HEAD
 Main.new.start
-=======
-Main.new.start
->>>>>>> 613c3f89196e3532dec82421572cffffe2c98252
