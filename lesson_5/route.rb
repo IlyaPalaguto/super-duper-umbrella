@@ -2,7 +2,6 @@ class Route
 	include InstanceCounter
 	attr_reader :intermediate_stations, :from, :to, :title
 	initialize_counter
-
 	def initialize(from, to)
 		register_instance
 		@from = from

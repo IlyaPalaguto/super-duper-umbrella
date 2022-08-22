@@ -3,7 +3,6 @@ class Station
 	initialize_counter
 	@@all_station = []
 	attr_reader :title
-
 	def initialize(title)
 		register_instance
 		@title = title

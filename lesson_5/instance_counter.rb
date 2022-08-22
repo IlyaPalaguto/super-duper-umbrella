@@ -4,7 +4,6 @@ module InstanceCounter
     base.include InstanceMethods
   end
 
-
   module ClassMethods
 		attr_accessor :count_instances	# Я понимаю что это не правильно, но я не понял как создать 
   	def instances 									# переменную класса для наследников модуля, а не для самого модуля InstanceCounter

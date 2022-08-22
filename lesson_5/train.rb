@@ -1,7 +1,6 @@
 class Train
 	include ManufacturerCompany
 	include InstanceCounter
-
 	attr_accessor :speed
 	attr_reader :location, :type, :number, :active_route, :cars
 

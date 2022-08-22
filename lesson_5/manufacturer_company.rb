@@ -6,7 +6,6 @@ module ManufacturerCompany
 	def set_company(title)
 		self.manufacturer_company = title
 	end
-
 	protected
 	attr_accessor :manufacturer_company
 end

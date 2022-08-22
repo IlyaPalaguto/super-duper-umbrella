@@ -215,5 +215,4 @@ class Main
 		return "exit"
 	end
 end
-
 Main.new.start

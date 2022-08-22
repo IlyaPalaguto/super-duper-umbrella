@@ -1,7 +1,6 @@
 class Carriage
 	include ManufacturerCompany
 	attr_reader :to_train, :count
-
 	def initialize
 		@to_train = nil
 	end
