@@ -4,7 +4,7 @@ class Train
 	attr_accessor :speed
 	attr_reader :location, :type, :number, :active_route, :cars
 
-	@@all_trains = []
+	@@trains = []
 	initialize_counter
 
 	def initialize(number)
@@ -15,11 +15,11 @@ class Train
 		@location = nil
 		@active_route = nil
 		@type = nil
-		@@all_trains << self
+		@@trains << self
 	end
 
 	def self.find(number)
-		nil if (@@all_trains.each {|train| return train if train.number == number}).empty?
+		nil if (@@trains.each {|train| return train if train.number == number}).empty?
 	end
 
 	def set_route(route)
