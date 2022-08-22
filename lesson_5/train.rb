@@ -22,7 +22,6 @@ class Train
 		nil if (@@all_trains.each {|train| return train if train.number == number}).empty?
 	end
 
-
 	def set_route(route)
 		set_route!(route)
 		send_train_on_first_station!(route)

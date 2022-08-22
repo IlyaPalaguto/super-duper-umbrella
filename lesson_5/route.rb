@@ -46,7 +46,6 @@ class Route
 	end
 
 	private
-
 	def add_station!(station)
 		@intermediate_stations << station
 	end

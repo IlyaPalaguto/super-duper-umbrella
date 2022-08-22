@@ -53,7 +53,6 @@ class Station
 	end
 
 	private
-
 	def send_train!(train)
 		@trains_on_station.delete(train)
 	end

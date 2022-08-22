@@ -1,3 +1,2 @@
 class PassangerCarriage < Carriage
-  
 end

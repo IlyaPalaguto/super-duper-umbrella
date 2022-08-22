@@ -14,6 +14,7 @@ class CargoTrain < Train
 	end
 
 	private
+	
 	def hook_cars!(car)	# что бы злоумышленник не пристегивал вагоны на ходу и неподходящие вагоны
 		@cars << car
 		car.lock_car(self)

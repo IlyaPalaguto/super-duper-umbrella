@@ -21,4 +21,5 @@ module InstanceCounter
   		self.class.count_instances += 1
   	end
   end
+	
 end

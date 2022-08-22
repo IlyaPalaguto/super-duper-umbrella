@@ -26,7 +26,6 @@ class Carriage
 	end
 
 	protected
-
 	def lock_car!(train)
 		@to_train = train 
 	end
