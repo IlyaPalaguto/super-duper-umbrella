@@ -38,7 +38,14 @@ class Main
     0 - Выйти из приложения"
   end
 
-	
+	def exceptions_check(arg1)
+		arg1
+	rescue
+		puts "Ошибка: #{e.message}"
+		puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+		retry if tryed_quantity != 0
+	end
+
 	
 	
   def get_user_action
@@ -46,9 +53,29 @@ class Main
     action = gets.chomp.to_i
     case action
     when 1
-			create_station
+    	tryed_quantity = 3
+    	exceptions_check(create_station)
+   #  	tryed_quantity = 3
+   #  	begin
+			# 	create_station
+			# 	puts "Станция #{@stations.last.title} была успешно создана."
+			# rescue RuntimeError => e
+			# 	tryed_quantity -= 1
+			# 	puts "Ошибка: #{e.message}"
+			# 	puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+			# 	retry if tryed_quantity != 0
+			# end
     when 2
-      create_train
+    	tryed_quantity = 3
+    	begin
+	      create_train
+				puts "Поезд #{@trains.last.number} был успешно создан."
+      rescue RuntimeError => e
+				tryed_quantity -= 1
+				puts "Ошибка: #{e.message}"
+				puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+				retry if tryed_quantity != 0
+			end
     when 3
       user_input = 0
       until (1..2).cover?(user_input)
@@ -56,7 +83,16 @@ class Main
         user_input = gets.chomp.to_i
       end
       if user_input == 1
-        create_route
+      	tryed_quantity = 3
+	    	begin
+	        create_route
+	        puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
+        rescue RuntimeError => e
+					tryed_quantity -= 1
+					puts "Ошибка: #{e.message}"
+					puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+					retry if tryed_quantity != 0
+				end
       else
         user_input = 0
         until (1..2).cover?(user_input)
@@ -117,7 +153,7 @@ class Main
 		@trains.each_with_index {|train, i| puts "#{i + 1} - #{train.number}"}
 	end
 
-	def create_train(tryed_quantity = 3)
+	def create_train
 		puts "Поезд какого типа создать? \n1 - Пассажирский \n2 - Грузовой"
 		if gets.chomp.to_i == 1
 			puts "Введите номер поезда\nДопустимый формат номера \"***-**\""
@@ -126,35 +162,17 @@ class Main
 			puts "Введите номер поезда\nДопустимый формат номера \"***-**\""
 			@trains << CargoTrain.new(gets.chomp.upcase)
 		end
-		puts "Поезд с номером #{@trains.last.number} был успешно создан"
-	rescue RuntimeError => e
-		tryed_quantity -= 1
-		puts "Ошибка: #{e.message}"
-		puts "Попробуйте еще раз\n(осталось попыток: #{3-tryed_quantity})" if tryed_quantity != 0
-		retry if tryed_quantity != 0
 	end
 
-	def create_station(tryed_quantity = 3)
+	def create_station
 		puts "Введите название станции"
 		@stations << (Station.new(gets.chomp.capitalize))
-		puts "Станция #{@stations.last.title} была успешно создана."
-	rescue RuntimeError => e
-		tryed_quantity -= 1
-		puts "Ошибка: #{e.message}"
-		puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-		retry if tryed_quantity != 0
 	end
 
 	def create_route(tryed_quantity = 3)
 		from = station_user_choice("точки отправления")
 		to = station_user_choice("точки прибытия")
 		@routes << Route.new(from, to)
-		puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
-	rescue RuntimeError => e
-		tryed_quantity -= 1
-		puts "Ошибка: #{e.message}"
-		puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-		retry if tryed_quantity != 0
 	end
 
 	def add_station_on_route
