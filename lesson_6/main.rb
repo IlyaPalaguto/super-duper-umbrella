@@ -38,33 +38,21 @@ class Main
     0 - Выйти из приложения"
   end
 
-	def exceptions_check(arg1)
-		arg1
-	rescue
-		puts "Ошибка: #{e.message}"
-		puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-		retry if tryed_quantity != 0
-	end
-
-	
-	
   def get_user_action
     puts "Введите цифру соответствующую действию"
     action = gets.chomp.to_i
     case action
     when 1
     	tryed_quantity = 3
-    	exceptions_check(create_station)
-   #  	tryed_quantity = 3
-   #  	begin
-			# 	create_station
-			# 	puts "Станция #{@stations.last.title} была успешно создана."
-			# rescue RuntimeError => e
-			# 	tryed_quantity -= 1
-			# 	puts "Ошибка: #{e.message}"
-			# 	puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-			# 	retry if tryed_quantity != 0
-			# end
+    	begin
+				create_station
+				puts "Станция #{@stations.last.title} была успешно создана."
+			rescue RuntimeError => e
+				tryed_quantity -= 1
+				puts "Ошибка: #{e.message}"
+				puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+				retry if tryed_quantity != 0
+			end
     when 2
     	tryed_quantity = 3
     	begin
