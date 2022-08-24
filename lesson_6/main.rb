@@ -37,32 +37,20 @@ class Main
     9 - Посмотреть список станций
     0 - Выйти из приложения"
   end
-
+	
   def get_user_action
     puts "Введите цифру соответствующую действию"
     action = gets.chomp.to_i
     case action
     when 1
-    	tryed_quantity = 3
-    	begin
+			error_handling do
 				create_station
 				puts "Станция #{@stations.last.title} была успешно создана."
-			rescue RuntimeError => e
-				tryed_quantity -= 1
-				puts "Ошибка: #{e.message}"
-				puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-				retry if tryed_quantity != 0
 			end
     when 2
-    	tryed_quantity = 3
-    	begin
+    	error_handling do
 	      create_train
 				puts "Поезд #{@trains.last.number} был успешно создан."
-      rescue RuntimeError => e
-				tryed_quantity -= 1
-				puts "Ошибка: #{e.message}"
-				puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-				retry if tryed_quantity != 0
 			end
     when 3
       user_input = 0
@@ -71,15 +59,9 @@ class Main
         user_input = gets.chomp.to_i
       end
       if user_input == 1
-      	tryed_quantity = 3
-	    	begin
+	    	error_handling do
 	        create_route
 	        puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
-        rescue RuntimeError => e
-					tryed_quantity -= 1
-					puts "Ошибка: #{e.message}"
-					puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
-					retry if tryed_quantity != 0
 				end
       else
         user_input = 0
@@ -110,6 +92,15 @@ class Main
       exit_app
     end
   end
+	
+	def error_handling(tryed_quantity = 3)
+		yield
+	rescue RuntimeError => e
+		tryed_quantity -= 1
+		puts "Ошибка: #{e.message}"
+		puts "Попробуйте еще раз\n(осталось попыток: #{tryed_quantity})" if tryed_quantity != 0
+		retry if tryed_quantity != 0
+	end
 	
 	def station_user_choice(added_text = "")
 		puts "Выберте станцию " + added_text

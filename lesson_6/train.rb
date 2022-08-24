@@ -16,8 +16,8 @@ class Train
 		@location = nil
 		@active_route = nil
 		@type = nil
-		@@trains << self
 		validate!
+		@@trains << self
 	end
 	
 	def valid?

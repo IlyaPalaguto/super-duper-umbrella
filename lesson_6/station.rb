@@ -9,8 +9,8 @@ class Station
 		register_instance
 		@title = title
 		@trains_on_station = []
-		@@stations << self
 		validate!
+		@@stations << self
 	end
 
 	def valid?

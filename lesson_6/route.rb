@@ -45,10 +45,12 @@ class Route
 	end
 	
 	def off_route?(station)
+		false
 		true if !@intermediate_stations.include?(station)
 	end
 	
 	def on_route?(station)
+		false
 		true if @intermediate_stations.include?(station)
 	end
 	

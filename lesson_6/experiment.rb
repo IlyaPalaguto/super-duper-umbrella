@@ -14,10 +14,10 @@ def create_train
 	Train.new(gets.chomp)
 end
 
-def check_exceptions(action)
+def check_exceptions
 	try_quantity = 0
 	begin
-		action
+		yield
 		puts "Поезд успешно создан!"
 	rescue RuntimeError => e
 		try_quantity += 1
@@ -26,6 +26,8 @@ def check_exceptions(action)
 	end
 end
 
-check_exceptions(create_train)
+check_exceptions do
+	create_train
+end
 
 
