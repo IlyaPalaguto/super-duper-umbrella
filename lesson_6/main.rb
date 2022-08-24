@@ -45,12 +45,10 @@ class Main
     when 1
 			error_handling do
 				create_station
-				puts "Станция #{@stations.last.title} была успешно создана."
 			end
     when 2
     	error_handling do
 	      create_train
-				puts "Поезд #{@trains.last.number} был успешно создан."
 			end
     when 3
       user_input = 0
@@ -61,7 +59,6 @@ class Main
       if user_input == 1
 	    	error_handling do
 	        create_route
-	        puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
 				end
       else
         user_input = 0
@@ -137,21 +134,25 @@ class Main
 		if gets.chomp.to_i == 1
 			puts "Введите номер поезда\nДопустимый формат номера \"***-**\""
 			@trains << PassangerTrain.new(gets.chomp.upcase)
+			puts "Поезд #{@trains.last.number} был успешно создан."
 		else
 			puts "Введите номер поезда\nДопустимый формат номера \"***-**\""
 			@trains << CargoTrain.new(gets.chomp.upcase)
+			puts "Поезд #{@trains.last.number} был успешно создан."
 		end
 	end
 
 	def create_station
 		puts "Введите название станции"
 		@stations << (Station.new(gets.chomp.capitalize))
+		puts "Станция #{@stations.last.title} была успешно создана."
 	end
 
 	def create_route(tryed_quantity = 3)
 		from = station_user_choice("точки отправления")
 		to = station_user_choice("точки прибытия")
 		@routes << Route.new(from, to)
+		puts "Маршрут был создан \nПуть следования: \"#{@routes.last.route_title}\""
 	end
 
 	def add_station_on_route
