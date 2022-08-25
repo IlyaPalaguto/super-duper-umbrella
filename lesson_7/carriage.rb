@@ -1,8 +1,18 @@
 class Carriage
 	include ManufacturerCompany
-	attr_reader :train_connected, :count
-	def initialize(seats = 0, value = 0)
+	attr_reader :train_connected, :count, :total_place, :used_place
+	def initialize(total_place)
 		@train_connected = nil
+		@total_place = total_place
+		@used_place = 0
+	end
+
+	def free_place
+		total_place - used_place
+	end
+
+	def take_place
+		raise "Not implemented"
 	end
 
 	def lock_car(train)
@@ -14,28 +24,19 @@ class Carriage
 	end
 
 	def passanger?
-		false
-		true if self.class == PassangerCarriage
+		self.class == PassangerCarriage
 	end
 
 	def cargo?
-		false
-		true if self.class == CargoCarriage
-	end
-
-	def on_station?
-		false
-		true if locked? && @train_connected.location
+		self.class == CargoCarriage
 	end
 
 	def locked?
-		false
-		true if @train_connected
+		!train_connected.nil?
 	end
 
 	def unlocked?
-		false
-		true if @train_connected.nil?
+		train_connected.nil?
 	end
 
 	protected

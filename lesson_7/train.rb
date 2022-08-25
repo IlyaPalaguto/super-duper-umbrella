@@ -21,7 +21,7 @@ class Train
 	end
 
 	def each_car_of_train(&block)
-		@cars.each_with_index {|car, index| block.call(car, index)}
+		cars.each_with_index {|car, index| block.call(car, index)}
 	end
 	
 	def valid?
@@ -45,8 +45,8 @@ class Train
 	end
 	
 	def go(where)
-		go_next_station! if where == 1
-		go_back_station! if where == 2
+		return go_next_station! if where == 1
+		return go_back_station! if where == 2
 	end
 	
 	def go_next_station!
@@ -66,31 +66,35 @@ class Train
 	end
 		
 	def next_station
-		@active_route.whole_stations[current_index_station + 1] if @location && !on_last_station?
+		active_route.whole_stations[current_index_station + 1] if location && !on_last_station?
 	end
 
 	def previous_station
-		@active_route.whole_stations[current_index_station - 1] if @location && !on_first_station?
+		active_route.whole_stations[current_index_station - 1] if location && !on_first_station?
 	end
 			
 	def on_first_station?
-		false
-		true if @location == @active_route.from
+		location == active_route.from
 	end
 	
 	def on_last_station?
-		false
-		true if @location == @active_route.to
+		location == active_route.to
 	end
 	
 	def hooked?(car)
-		false
-		true if @cars.include?(car)
+		cars.include?(car)
 	end
 	
 	def train_stopped?
-		false
-		true if @speed == 0
+		speed == 0
+	end
+
+	def passanger?
+		self.class == PassangerTrain
+	end
+	
+	def cargo?
+		self.class == CargoTrain
 	end
 	
 	protected
@@ -104,7 +108,7 @@ class Train
 	end
 			
 	def send_train_on_first_station!(route)
-		@location.send_train(self) if @location
+		@location.send_train(self) if self.location
 		@location = route.from
 		@location.get_train(self)
 	end

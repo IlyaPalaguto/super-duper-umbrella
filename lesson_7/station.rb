@@ -14,7 +14,7 @@ class Station
 	end
 
 	def each_train_on_station(&block)
-		@trains_on_station.each_with_index {|train, index| block.call(train, index)}
+		trains_on_station.each_with_index {|train, index| block.call(train, index)}
 	end
 
 	def valid?
@@ -41,25 +41,15 @@ class Station
 	end
 	
 	def passanger_trains_on_station
-		@trains_on_station.map {|train| train if passanger?(train)}.compact
+		trains_on_station.map {|train| train if train.passanger?}.compact
 	end
 	
 	def cargo_trains_on_station
-		@trains_on_station.map {|train| train if cargo?(train)}.compact
-	end
-	
-	def passanger?(train)
-		false
-		true if train.class == PassangerTrain
-	end
-	
-	def cargo?(train)
-		false
-		true if train.class == CargoTrain
+		trains_on_station.map {|train| train if train.cargo?}.compact
 	end
 	
 	def train_on_station?(train)
-		@trains_on_station.include?(train)
+		trains_on_station.include?(train)
 	end
 	
 	private
@@ -76,13 +66,3 @@ class Station
 		@trains_on_station << train
 	end
 end
-
-
-
-tyumen = Station.new('Tyumen')
-moscow = Station.new('Moscow')
-route = Route.new(tyumen, moscow)
-train = PassangerTrain.new('asd-12')
-train2 = PassangerTrain.new('asd-13')
-train.set_route(route)
-train2.set_route(route)

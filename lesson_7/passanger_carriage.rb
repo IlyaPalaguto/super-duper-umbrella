@@ -1,20 +1,11 @@
 class PassangerCarriage < Carriage
-  attr_reader :free_seats, :occupied_seats
-  def initialize(seats = 50)
+
+  def initialize(total_place)
     super
-    @seats = seats
-    @occupied_seats = 0
-    @free_seats = seats
   end
 
-  def take_seat
-		take_seat! if on_station?
+  def take_place
+		@used_place += 1 if free_place > 0
 	end
 
-  private
-
-	def take_seat!
-		@free_seats -= 1
-		@occupied_seats += 1
-	end
 end
