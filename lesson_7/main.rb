@@ -39,6 +39,7 @@ class Main
 		{id: 0, title: 'Выйти из приложения', action: [:exit_app]}
 	]
   def show_menu
+		puts "	Меню:"
     MENU.each {|hash| puts "#{hash[:id]} - #{hash[:title]}"}
   end
 	
