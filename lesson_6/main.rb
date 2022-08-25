@@ -43,13 +43,9 @@ class Main
     action = gets.chomp.to_i
     case action
     when 1
-			error_handling do
-				create_station
-			end
+			error_handling {create_station}
     when 2
-    	error_handling do
-	      create_train
-			end
+    	error_handling { create_train }
     when 3
       user_input = 0
       until (1..2).cover?(user_input)
@@ -57,9 +53,7 @@ class Main
         user_input = gets.chomp.to_i
       end
       if user_input == 1
-	    	error_handling do
-	        create_route
-				end
+	    	error_handling { create_route }
       else
         user_input = 0
         until (1..2).cover?(user_input)
