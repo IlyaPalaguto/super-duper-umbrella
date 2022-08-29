@@ -229,9 +229,10 @@ class Main
     error_handling(1) do
       train = train_user_choice
       raise 'У поезда нет назначенного маршрута!' if train.active_route.nil?
-      raise 'Поезд не может ехать в этом направлениии, так как он стоит на крайней станции' if train.go(get_correct_user_choice(
-                                                                                                          2, "1 - Вперед\n2 - Назад"
-                                                                                                        )).nil?
+      if train.go(get_correct_user_choice(2, "1 - Вперед\n2 - Назад")).nil?
+        raise 'Поезд не может ехать в этом направлениии, так как он стоит на крайней станции'
+
+      end
 
       puts "Поезд уехал на станцию \"#{train.location.title}\""
     end

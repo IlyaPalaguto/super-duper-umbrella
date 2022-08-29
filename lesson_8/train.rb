@@ -53,7 +53,7 @@ class Train
   end
 
   def go_next_station!
-    return unless !@location.nil? && !on_last_station?
+    return unless location? && !on_last_station?
 
     @location.send_train(self)
     @location = next_station
@@ -61,7 +61,7 @@ class Train
   end
 
   def go_back_station!
-    return unless !@location.nil? && !on_first_station?
+    return unless location? && !on_first_station?
 
     @location.send_train(self)
     @location = previous_station
