@@ -30,7 +30,7 @@ class Train
   def valid?
     validate!
     true
-  rescue StandardError
+  rescue RuntimeError
     false
   end
 
