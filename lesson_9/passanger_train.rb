@@ -3,6 +3,9 @@
 class PassangerTrain < Train
   attr_reader :seats
 
+  validate :number, :presence
+  validate :number, :format, NUMBER_FORMAT
+  validate :number, :type, String
   initialize_counter
   def initialize(number)
     super

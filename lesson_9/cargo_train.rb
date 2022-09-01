@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class CargoTrain < Train
+  validate :number, :presence
+  validate :number, :format, NUMBER_FORMAT
+  validate :number, :type, String
   initialize_counter
 
   def initialize(number)

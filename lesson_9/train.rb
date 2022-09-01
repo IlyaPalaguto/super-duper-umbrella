@@ -26,7 +26,7 @@ class Train
     @location = nil
     @active_route = nil
     @type = nil
-    validate!
+    self.validate!
     @@trains << self
   end
 
